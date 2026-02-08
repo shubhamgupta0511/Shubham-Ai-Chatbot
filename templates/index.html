@@ -1,24 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Shubham's AI</title>
-    <link rel="stylesheet" href="/static/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InfraBot</title>
+<link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
 
-<div class="chat-container">
+<div class="app">
 
-    <div class="header">
-        🤖 Shubham's AI Assistant
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">InfraBot</div>
+
+        <button class="new-chat" onclick="clearChat()">+ New Chat</button>
+
+        <div class="sidebar-footer">
+            IT Support Assistant
+        </div>
     </div>
 
-    <div id="chat-box" class="chat-box"></div>
+    <!-- Main Chat -->
+    <div class="main">
 
-    <div class="input-area">
-        <input id="user-input" type="text" placeholder="Type your message..." />
-        <button onclick="sendMessage()">Send</button>
+        <div id="chat-box" class="chat-box"></div>
+
+        <div class="input-area">
+            <input id="user-input" type="text" placeholder="Ask your IT problem...">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+
     </div>
 
 </div>

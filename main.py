@@ -8,7 +8,7 @@ load_dotenv()
 # Initialize Groq client
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-print("\nShubham's AI")
+print("\InfraBot")
 print("Type 'exit' to quit\n")
 
 # conversation memory

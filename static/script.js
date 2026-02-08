@@ -1,44 +1,52 @@
-async function sendMessage() {
-    let input = document.getElementById("user-input");
-    let chatBox = document.getElementById("chat-box");
+async function sendMessage(){
 
-    let userText = input.value;
-    if (!userText) return;
+let input = document.getElementById("user-input");
+let chatBox = document.getElementById("chat-box");
 
-    // user message
-    chatBox.innerHTML += `<div class="message user">${userText}</div>`;
-    input.value = "";
-    chatBox.scrollTop = chatBox.scrollHeight;
+let userText = input.value.trim();
+if(!userText) return;
 
-    // typing animation
-    let typingDiv = document.createElement("div");
-    typingDiv.className = "message bot";
-    typingDiv.id = "typing";
-    typingDiv.innerHTML = "Typing...";
-    chatBox.appendChild(typingDiv);
-    chatBox.scrollTop = chatBox.scrollHeight;
+// user bubble
+chatBox.innerHTML += `<div class="message user">${userText}</div>`;
+input.value="";
+chatBox.scrollTop = chatBox.scrollHeight;
 
-    // API call
-    let response = await fetch("/chat", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ message: userText })
-    });
+// typing animation
+let typing = document.createElement("div");
+typing.className="message bot";
+typing.id="typing";
+typing.innerHTML = `
+<div class="typing">
+<span></span><span></span><span></span>
+</div>`;
+chatBox.appendChild(typing);
+chatBox.scrollTop = chatBox.scrollHeight;
 
-    let data = await response.json();
+// API call
+let response = await fetch("/chat",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({message:userText})
+});
 
-    // remove typing
-    document.getElementById("typing").remove();
+let data = await response.json();
 
-    // bot reply
-    chatBox.innerHTML += `<div class="message bot">${data.reply}</div>`;
-    chatBox.scrollTop = chatBox.scrollHeight;
+// remove typing
+document.getElementById("typing").remove();
+
+// bot reply
+chatBox.innerHTML += `<div class="message bot">${data.reply}</div>`;
+chatBox.scrollTop = chatBox.scrollHeight;
+input.focus();
 }
 
-
-document.getElementById("user-input")
-.addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        sendMessage();
-    }
+// enter key
+document.getElementById("user-input").addEventListener("keypress",function(e){
+if(e.key==="Enter"){
+sendMessage();
+}
 });
+
+function clearChat(){
+document.getElementById("chat-box").innerHTML="";
+}
