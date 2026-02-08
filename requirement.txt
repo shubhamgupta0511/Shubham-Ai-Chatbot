@@ -1,4 +1,10 @@
-groq
 python-dotenv
 flask
 flask-cors
+flask-session
+groq
+pandas
+sentence-transformers
+scikit-learn
+rapidfuzz
+gunicorn
